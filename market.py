@@ -17,6 +17,8 @@ class Market:
     def _generate_prices(self):
         if self.pattern == "square":
             return self._generate_square_wave()
+        elif self.pattern == "sinus":
+            return self._generate_sinus_wave()
         else:
             raise ValueError(f"Unknown pattern type: {self.pattern}")
     
@@ -33,6 +35,13 @@ class Market:
                 i += 1
             toggle = self.high_price if toggle == self.low_price else self.low_price
         return np.array(prices)
+    
+    def _generate_sinus_wave(self):
+        x = np.linspace(0, 2 * np.pi * 4, self.num_steps, endpoint=False)
+        mid = (self.high_price + self.low_price) / 2
+        amplitude = (self.high_price - self.low_price) / 2
+        prices = mid + amplitude * np.sin(x)
+        return prices
     
     def plot(self):
         plt.figure(figsize=(16, 9), dpi=150)
