@@ -13,11 +13,16 @@ class Battery:
     
     def charge(self, duration=15):
         """Charge the battery (duration in minutes)."""
-        self.history.append((self.soc, duration, 1))
+        self.history.append((self.soc, duration, 2))
         energy_added = self.power * (duration / 60)
         soc_before = self.soc
         self.soc = min(self.capacity, self.soc + energy_added)
         return self.soc - soc_before
+    
+    def idle(self, duration=15):
+        """Idle the battery (duration in minutes)."""
+        self.history.append((self.soc, duration, 1))
+        return 0.0
     
     def discharge(self, duration=15):
         """Discharge the battery (duration in minutes)."""

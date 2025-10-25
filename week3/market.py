@@ -27,7 +27,7 @@ class Market:
         toggle = random.choice([self.high_price, self.low_price])
         i = 0
         while i < self.num_steps:
-            block_length = random.randint(2, 8) # how many timesteps this block lasts
+            block_length = random.randint(2, 16) # how many timesteps this block lasts
             for _ in range(block_length):
                 if i >= self.num_steps:
                     break
